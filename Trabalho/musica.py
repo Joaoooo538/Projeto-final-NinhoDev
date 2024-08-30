@@ -2,7 +2,7 @@ import os
 from Conexao import Conexao
 import sys 
 
-conexaoBD = Conexao("localhost", "root", "85106429", "spotninho")
+conexaoBD = Conexao("localhost", "root", "mysql", "spotninho")
 
 def resource_path(relative_path):
     
