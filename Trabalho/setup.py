@@ -11,7 +11,7 @@ conexaoBD.manipular("USE spotninho")
 conexaoBD.manipular('''
     CREATE TABLE spotninho.usuario(
     id_usuario INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    nome VARCHAR(255) NOT NULL,
+    nome VARCHAR(255) NOT NULL UNIQUE,
     senha VARCHAR(255) NOT NULL,
     email VARCHAR(255) NOT NULL
     );
@@ -29,7 +29,7 @@ conexaoBD.manipular('''
 conexaoBD.manipular('''
     CREATE TABLE spotninho.musicas(
         id_musica INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-        nome VARCHAR(255) NOT NULL,
+        nome VARCHAR(255) NOT NULL UNIQUE,
         duracao INT NOT NULL,
         artista VARCHAR(255) NOT NULL,
         genero VARCHAR(255) NOT NULL,
@@ -45,6 +45,16 @@ conexaoBD.manipular('''
         id_musica INT NOT NULL,
         CONSTRAINT fk_idplaylist FOREIGN KEY(id_playlist) REFERENCES playlist(id_playlist),
         CONSTRAINT fk_idmusica FOREIGN KEY(id_musica) REFERENCES musicas(id_musica)
+    );
+''')
+
+conexaoBD.manipular('''
+    CREATE TABLE spotninho.historico(
+        id_historico INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+        nome VARCHAR(255) NOT NULL,
+        musica VARCHAR(255) NOT NULL,
+        CONSTRAINT fk_nome FOREIGN KEY(nome) REFERENCES usuario(nome),
+        CONSTRAINT fk_nome_music FOREIGN KEY(musica) REFERENCES musicas(nome)
     );
 ''')
 
