@@ -2,7 +2,7 @@ from Conexao import Conexao
 import os
 import interface
 
-conexaoBD = Conexao("localhost", "root", "85106429", "spotninho")
+conexaoBD = Conexao("localhost", "root", "mysql", "spotninho")
 
 def cadastrar_usuario():
     
@@ -42,43 +42,36 @@ def cadastrar_usuario():
     os.system("PAUSE")
 
 def remover_usuario():
-    
+
     print("\n----- REMOVER USUÁRIO -----\n")
     
     email = input("Insira o email do usuário que deseja remover: ")
     
     usuario_existente = conexaoBD.consultarComParametros("SELECT * FROM usuario WHERE email = %s", (email,))
     
-    id_usuario = usuario_existente[0][0]
-    
-    playlist = conexaoBD.consultarComParametros("SELECT * FROM playlist WHERE id_usuario  = %s", (id_usuario,))
-    
-    lista_id_play = []
-    
-    for ID in playlist:
-        
-        lista_id_play.append(ID[0])
-        
     if usuario_existente:
+        id_usuario = usuario_existente[0][0]
+        playlist = conexaoBD.consultarComParametros("SELECT * FROM playlist WHERE id_usuario  = %s", (id_usuario,))
         
+        lista_id_play = []
+        
+        for ID in playlist:
+            lista_id_play.append(ID[0])
+            
         conexaoBD.manipularComParametros("DELETE FROM historico WHERE nome = %s", (usuario_existente[0][1],))
         
         for i in range(len(lista_id_play)):
-            
             conexaoBD.manipularComParametros("DELETE FROM lista WHERE id_playlist = %s", (lista_id_play[i],))
             
         conexaoBD.manipularComParametros("DELETE FROM playlist WHERE id_usuario = %s", (id_usuario,))
-        
         conexaoBD.manipularComParametros("DELETE FROM usuario WHERE email = %s", (email,))
         
         print("\nUSUÁRIO REMOVIDO!")
         
     else:
-        
         print("\nUSUÁRIO NÃO ENCONTRADO.")
-        
-    print("")
     
+    print("")
     os.system("PAUSE")
 
 def entrar():
@@ -112,7 +105,7 @@ def menu_usuario(nome_usuario):
 [1] - CRIAR PLAYLIST.
 [2] - VER PLAYLISTS.
 [3] - VER HISTÓRICO.
-[4] - ESCUTAR PLAYLIST'S
+[4] - ESCUTAR PLAYLIST'S.
 [5] - SAIR.
 ''')
         
@@ -225,30 +218,36 @@ def ver_playlists(nome_usuario):
                     print(f"{musica[0]} - {musica[1]}")
             else:
                 print("Nenhuma música encontrada na playlist.")
+                print("")
+            print("")
     else:
         print("Nenhuma playlist encontrada.")
     os.system("PAUSE")
 
+
 def ver_historico(nome_usuario):
-    
+
     print("\n----- VER HISTÓRICO -----")
 
-    print("\nHISTÓRICO DE MÚSICAS: ")
-    
     historico = conexaoBD.consultarComParametros("SELECT * FROM historico WHERE nome = %s", (nome_usuario,))
     
-    i = 1
+    if historico:
+        print("\nHISTÓRICO DE MÚSICAS:")
+        i = 1
     
-    for musica in historico:
+        for musica in historico:
         
-        print("")
-        print(f"Musica {i} escutada: {musica[2]}")
+            print("")
+            print(f"Musica {i} escutada: {musica[2]}")
         
-        i = i + 1
-        
+            i = i + 1
+    
+    else:
+        print("Usuário sem histórico.")
+    
     print("")
-    
     os.system("PAUSE")
+
 
 while True:
     

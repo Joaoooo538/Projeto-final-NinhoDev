@@ -5,7 +5,7 @@ import player
 import sys
 from Conexao import Conexao
 
-conexaoBD = Conexao("localhost", "root", "85106429", "spotninho")
+conexaoBD = Conexao("localhost", "root", "mysql", "spotninho")
 posic = 0
 Iniciar = None
 musica_pausada = False
@@ -20,11 +20,17 @@ def resource_path(relative_path):
         base_path = os.path.abspath(".")
     return os.path.join(base_path, relative_path)
 
-GO_BACK_IMAGE_PATH = resource_path('Images/back.png')
-GO_FORWARD_IMAGE_PATH = resource_path('Images/next.png')
-PLAY_SONG_IMAGE_PATH = resource_path('Images/play_button.png')
-PAUSE_SONG_IMAGE_PATH = resource_path('Images/pause.png')
-DEFAULT_ALBUM_COVER_IMAGE_PATH = resource_path('Images/pilot.png')
+# GO_BACK_IMAGE_PATH = resource_path('Images/back.png')
+# GO_FORWARD_IMAGE_PATH = resource_path('Images/next.png')
+# PLAY_SONG_IMAGE_PATH = resource_path('Images/play_button.png')
+# PAUSE_SONG_IMAGE_PATH = resource_path('Images/pause.png')
+# DEFAULT_ALBUM_COVER_IMAGE_PATH = resource_path('Images/pilot.png')
+
+back_Images = resource_path('Images/back.png')
+next_Images = resource_path('Images/next.png')
+playbutton_Images = resource_path('Images/play_button.png')
+pause_Images = resource_path('Images/pause.png')
+pilot_Images = resource_path('Images/pilot.png')
 
 class Musica:
     def __init__(self, nome, artista, imagem, endereco):
@@ -34,7 +40,7 @@ class Musica:
         self.endereco = endereco
 
     def get_album_cover_path(self):
-        return self.imagem or DEFAULT_ALBUM_COVER_IMAGE_PATH
+        return self.imagem or pilot_Images
 
 def carregar_playlists(nome_usuario):
     global playlists_usuario
@@ -79,7 +85,7 @@ def rodar(usuario):
     global window
     
     playlists = carregar_playlists(usuario)
-    print(f"Suas playlists: {playlists}")
+    print(f"Spoti-Ninho em ação!")
 
     # Se não houver playlists, mostrar uma mensagem apropriada
     if playlists:
@@ -109,7 +115,7 @@ def rodar(usuario):
         [playlist_dropdown],
         [
             sg.Canvas(background_color='black', size=(40, 350), pad=None),
-            sg.Image(filename=DEFAULT_ALBUM_COVER_IMAGE_PATH, size=(350, 350), pad=None, key='album_cover'),
+            sg.Image(filename=pilot_Images, size=(350, 350), pad=None, key='album_cover'),
             sg.Canvas(background_color='black', size=(40, 350), pad=None)
         ],
         [sg.Canvas(background_color='black', size=(480, 10), pad=None)],
@@ -117,10 +123,10 @@ def rodar(usuario):
         [sg.Text('_'*80, background_color='black', text_color='white')],
         [
             sg.Canvas(background_color='black', size=(99, 200), pad=(0, 0)),
-            sg.Image(pad=(10, 0), filename=GO_BACK_IMAGE_PATH, enable_events=True, size=(35, 44), key='previous', background_color='black'),
-            sg.Image(filename=PLAY_SONG_IMAGE_PATH, size=(64, 64), pad=(10, 0), enable_events=True, key='play', background_color='black'),
-            sg.Image(filename=PAUSE_SONG_IMAGE_PATH, size=(58, 58), pad=(10, 0), enable_events=True, key='pause', background_color='black'),
-            sg.Image(filename=GO_FORWARD_IMAGE_PATH, enable_events=True, size=(35, 44), pad=(10, 0), key='next', background_color='black'),
+            sg.Image(pad=(10, 0), filename=back_Images, enable_events=True, size=(35, 44), key='previous', background_color='black'),
+            sg.Image(filename=playbutton_Images, size=(64, 64), pad=(10, 0), enable_events=True, key='play', background_color='black'),
+            sg.Image(filename=pause_Images, size=(58, 58), pad=(10, 0), enable_events=True, key='pause', background_color='black'),
+            sg.Image(filename=next_Images, enable_events=True, size=(35, 44), pad=(10, 0), key='next', background_color='black'),
         ],
         [sg.Column(layout=currently_playing, justification='c', element_justification='c', background_color='black', pad=None)]
     ]
@@ -160,7 +166,6 @@ def rodar(usuario):
             if musicas:
                 
                 Play_music(posic, musicas)
-                print(musicas_data[posic])
                 
             else:
                 
