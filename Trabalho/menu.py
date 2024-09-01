@@ -72,6 +72,7 @@ def remover_usuario():
         print("\nUSUÁRIO NÃO ENCONTRADO.")
     
     print("")
+    
     os.system("PAUSE")
 
 def entrar():
@@ -182,6 +183,7 @@ def criar_playlist(nome_usuario):
         else:
             
             conexaoBD.manipularComParametros(
+                
                 "INSERT INTO lista (id_playlist, id_musica) VALUES (%s, %s)",
                 (id_playlist, escolha_musica)
                 
@@ -215,15 +217,22 @@ def ver_playlists(nome_usuario):
             if musicas:
                 print("\nMúsicas na playlist:")
                 for musica in musicas:
+                    
                     print(f"{musica[0]} - {musica[1]}")
+                    
             else:
+                
                 print("Nenhuma música encontrada na playlist.")
+                
                 print("")
+                
             print("")
+            
     else:
+        
         print("Nenhuma playlist encontrada.")
+        
     os.system("PAUSE")
-
 
 def ver_historico(nome_usuario):
 
@@ -232,6 +241,7 @@ def ver_historico(nome_usuario):
     historico = conexaoBD.consultarComParametros("SELECT * FROM historico WHERE nome = %s", (nome_usuario,))
     
     if historico:
+        
         print("\nHISTÓRICO DE MÚSICAS:")
         i = 1
     
@@ -247,7 +257,6 @@ def ver_historico(nome_usuario):
     
     print("")
     os.system("PAUSE")
-
 
 while True:
     
@@ -274,5 +283,7 @@ while True:
         break
 
     else:
+        
         print("Opção inválida. Tente novamente.")
+        
         os.system("PAUSE")

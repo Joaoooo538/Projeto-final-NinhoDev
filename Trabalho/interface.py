@@ -30,7 +30,7 @@ back_Images = resource_path('Images/back.png')
 next_Images = resource_path('Images/next.png')
 playbutton_Images = resource_path('Images/play_button.png')
 pause_Images = resource_path('Images/pause.png')
-pilot_Images = resource_path('Images/ninho.png')
+pilot_Images = resource_path('Images/ninho2.png')
 
 class Musica:
     def __init__(self, nome, artista, imagem, endereco):
