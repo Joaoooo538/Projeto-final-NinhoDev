@@ -1,6 +1,6 @@
 from Conexao import Conexao
 
-conexaoBD = Conexao("localhost", "root", "mysql", "")
+conexaoBD = Conexao("localhost", "root", "85106429", "")
 
 conexaoBD.manipular("DROP DATABASE IF EXISTS spotninho")
 

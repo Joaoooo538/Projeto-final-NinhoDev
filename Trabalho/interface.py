@@ -5,7 +5,7 @@ import player
 import sys
 from Conexao import Conexao
 
-conexaoBD = Conexao("localhost", "root", "mysql", "spotninho")
+conexaoBD = Conexao("localhost", "root", "85106429", "spotninho")
 posic = 0
 Iniciar = None
 musica_pausada = False
@@ -30,7 +30,7 @@ back_Images = resource_path('Images/back.png')
 next_Images = resource_path('Images/next.png')
 playbutton_Images = resource_path('Images/play_button.png')
 pause_Images = resource_path('Images/pause.png')
-pilot_Images = resource_path('Images/pilot.png')
+pilot_Images = resource_path('Images/ninho.png')
 
 class Musica:
     def __init__(self, nome, artista, imagem, endereco):
@@ -52,8 +52,9 @@ def carregar_playlists(nome_usuario):
 
 def update_song_display(window, music):
     window['song_name'].update(music.nome)
-    window['currently_playing'].update(f'Tocando: {music.nome} - {music.artista}')
     
+    window['currently_playing'].update(f'''Artista: {music.artista}''')
+    window.refresh()
     album_cover_path = music.get_album_cover_path()
     window['album_cover'].update(filename=album_cover_path)
 
@@ -105,10 +106,11 @@ def rodar(usuario):
     ]
 
     currently_playing = [
-        [sg.Text(background_color='black', size=(200, 0), text_color='white', font=('Cooper Black', 10), key='currently_playing')]
-    ]
+    [sg.Text(background_color='black', size=(200, 0), text_color='white', font=('Tahoma', 10), key='currently_playing')]
+]
 
     main = [
+        
         [sg.Canvas(background_color='black', size=(480, 20), pad=None)],
         [sg.Column(layout=player_info, justification='c', element_justification='c', background_color='black')],
         [sg.Text('Escolha uma Playlist:', background_color='black', text_color='white', font=('Tahoma', 10))],
@@ -118,9 +120,12 @@ def rodar(usuario):
             sg.Image(filename=pilot_Images, size=(350, 350), pad=None, key='album_cover'),
             sg.Canvas(background_color='black', size=(40, 350), pad=None)
         ],
+       
         [sg.Canvas(background_color='black', size=(480, 10), pad=None)],
         [sg.Column(song_title_column, background_color='black', justification='c', element_justification='c')],
         [sg.Text('_'*80, background_color='black', text_color='white')],
+        
+        [sg.Column(layout=currently_playing, justification='c', element_justification='c', background_color='black', pad=(0, (10, 20)))],
         [
             sg.Canvas(background_color='black', size=(99, 200), pad=(0, 0)),
             sg.Image(pad=(10, 0), filename=back_Images, enable_events=True, size=(35, 44), key='previous', background_color='black'),
@@ -128,7 +133,7 @@ def rodar(usuario):
             sg.Image(filename=pause_Images, size=(58, 58), pad=(10, 0), enable_events=True, key='pause', background_color='black'),
             sg.Image(filename=next_Images, enable_events=True, size=(35, 44), pad=(10, 0), key='next', background_color='black'),
         ],
-        [sg.Column(layout=currently_playing, justification='c', element_justification='c', background_color='black', pad=None)]
+        
     ]
 
     window = sg.Window('Spoti-Ninho', layout=main, size=(480, 730), background_color='black', finalize=True, grab_anywhere=True, resizable=False)

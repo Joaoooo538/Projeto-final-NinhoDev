@@ -2,7 +2,7 @@ from Conexao import Conexao
 import os
 import interface
 
-conexaoBD = Conexao("localhost", "root", "mysql", "spotninho")
+conexaoBD = Conexao("localhost", "root", "85106429", "spotninho")
 
 def cadastrar_usuario():
     
@@ -187,13 +187,13 @@ def criar_playlist(nome_usuario):
                 
             )
     
-    print("PLAYLIST CRIADA COM SUCESSO!")
+    print("\nPLAYLIST CRIADA COM SUCESSO!")
     
     os.system("PAUSE")
 
 def ver_playlists(nome_usuario):
     
-    print("\n----- VER PLAYLISTS -----")
+    print("----- VER PLAYLISTS -----")
     
     id_usuario = conexaoBD.consultarComParametros("SELECT id_usuario FROM usuario WHERE nome = %s", (nome_usuario,))[0][0]
     
