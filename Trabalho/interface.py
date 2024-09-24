@@ -20,12 +20,6 @@ def resource_path(relative_path):
         base_path = os.path.abspath(".")
     return os.path.join(base_path, relative_path)
 
-# GO_BACK_IMAGE_PATH = resource_path('Images/back.png')
-# GO_FORWARD_IMAGE_PATH = resource_path('Images/next.png')
-# PLAY_SONG_IMAGE_PATH = resource_path('Images/play_button.png')
-# PAUSE_SONG_IMAGE_PATH = resource_path('Images/pause.png')
-# DEFAULT_ALBUM_COVER_IMAGE_PATH = resource_path('Images/pilot.png')
-
 back_Images = resource_path('Images/back.png')
 next_Images = resource_path('Images/next.png')
 playbutton_Images = resource_path('Images/play_button.png')
