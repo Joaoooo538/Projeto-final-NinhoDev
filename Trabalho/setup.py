@@ -60,14 +60,14 @@ conexaoBD.manipular('''
 
 conexaoBD.manipular('''
     INSERT INTO spotninho.musicas(artista, nome, genero, duracao, endereco, imagem) VALUES
-    ("Maneskin", "Beggin", "Rock", 149, "rep_musicas/Beggin.mp3", "Images/Beggin.png"),
+    ("Maneskin", "Beggin", "Rock", 149, "rep_musicas/Beggin.mp3", "Beggin.png");,
     ("Natanzinho", "Anjo Azul", "Sertanejo", 143, "rep_musicas/anjo.mp3", "Images/anjo.png"),
-    ("Marília Mendonça (cover)", "Troco de calçada", "Sertanejo", 154, "rep_musicas/mm.mp3", "Images/MM.png"),
-    ("Link Park", "In The End", "Eletrônica", 167, "rep_musicas/link_park.mp3", "Images/link.png"),
+    ("Marília Mendonça (cover)", "Troco de calçada", "Sertanejo", 154, "Images/rep_musicas/mm.mp3", "Images/MM.png"),
+    ("Link Park", "In The End", "Eletrônica", 167, "Trabalho/rep_musicas/link_park.mp3", "Images/link.png"),
     ("Ikimono-gakari", "Blue Bird", "Anime", 250, "rep_musicas/Blue Bird.mp3", "Images/bluebird.png"),
-    ("Delacruz", "Sunshine", "Hip Hop", 230, "rep_musicas/delacruz.mp3", "Images/sunshine (1).png"),
-    ("Aaron Smith", "Dancin", "Internacional", 232, "rep_musicas/dj jefinho.mp3", "Images/dancin.png"),
-    ("Legião Urbana", "Eduardo e Mônica", "Pop", 232, "rep_musicas/edem.mp3", "Images/images (1).png"),
-    ("Maíara e Maraisa", "Medo bobo", "Sertanejo", 232, "rep_musicas/medo.mp3", "Images/medo.png"),
-    ("Miranda Cosgrove", "Tema Icarly", "Pop", 232, "rep_musicas/icarly.mp3", "Images/icarly.png");
+    ("Delacruz", "Sunshine", "Hip Hop", 230, "rep_musicas/delacruz.mp3", "sunshine (1).png"),
+    ("Aaron Smith", "Dancin", "Internacional", 232, "rep_musicas/dj jefinho.mp3", "dancin.png"),
+    ("Legião Urbana", "Eduardo e Mônica", "Pop", 232, "rep_musicas/edem.mp3", "images (1).png"),
+    ("Maíara e Maraisa", "Medo bobo", "Sertanejo", 232, "rep_musicas/medo.mp3", "medo.png"),
+    ("Miranda Cosgrove", "Tema Icarly", "Pop", 232, "rep_musicas/icarly.mp3", "icarly.png");
 ''')
